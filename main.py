@@ -22,13 +22,15 @@ def download_cover(hero_id, hero_name, cover_names):
         os.makedirs(FOLDER_SAVE)
 
     for i, cover_name in enumerate(cover_names):
-        print('downloading:', hero_name, '-', cover_name)
+        print('downloading:', hero_name, '-', cover_name, end=' ')
         file_path = '%s%s-%s.jpg' % (FOLDER_SAVE, hero_name, cover_name)  # 生成图片文件名
         if os.path.exists(file_path):  # 避免重复下载
+            print('[exists]')
             continue
         # 样例：http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/152/152-bigskin-2.jpg
         url_img = URL_HERO_COVER_IMG % (hero_id, hero_id, i + 1)  # 生成海报图片URL
         request.urlretrieve(url_img, file_path)
+        print('[ok]')
 
 
 def download_all():
