@@ -28,10 +28,7 @@ def download_cover(hero_id, hero_name, cover_names):
             continue
         # 样例：http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/152/152-bigskin-2.jpg
         url_img = URL_HERO_COVER_IMG % (hero_id, hero_id, i + 1)  # 生成海报图片URL
-        res = request.urlopen(url_img)
-        data = res.read()
-        with open(file_path, 'wb') as file:
-            file.write(data)
+        request.urlretrieve(url_img, file_path)
 
 
 def download_all():
