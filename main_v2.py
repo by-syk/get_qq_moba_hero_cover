@@ -14,7 +14,7 @@ URL_HERO = r'https://pvp.qq.com/web201605/js/herolist.json'
 # 英雄海报图片URL
 URL_HERO_COVER_IMG = r'http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/%d/%d-bigskin-%d.jpg'
 # 图片存放路径
-FOLDER_SAVE = r'E:/Download/QQPVPHeroCover/'
+FOLDER_SAVE = r'E:/Download/QQPVPHeroCover'
 
 
 def download_cover(hero_id, hero_name, cover_names):
@@ -23,7 +23,7 @@ def download_cover(hero_id, hero_name, cover_names):
 
     for i, cover_name in enumerate(cover_names):
         print('downloading:', hero_name, '-', cover_name, end=' ')
-        file_path = '%s%s-%s.jpg' % (FOLDER_SAVE, hero_name, cover_name)  # 生成图片文件名
+        file_path = '%s/%s-%s.jpg' % (FOLDER_SAVE, hero_name, cover_name)  # 生成图片文件名
         if os.path.exists(file_path):  # 避免重复下载
             print('[exists]')
             continue
@@ -34,7 +34,7 @@ def download_cover(hero_id, hero_name, cover_names):
     
     # 继续探测新增但未及更新索引的海报图片
     for i in range(len(cover_names) + 1, len(cover_names) + 4):
-        file_path = '%s%s-%d.jpg' % (FOLDER_SAVE, hero_name, i)
+        file_path = '%s/%s-%d.jpg' % (FOLDER_SAVE, hero_name, i)
         if os.path.exists(file_path):
             print('downloading: %s - #%d [exists]' % (hero_name, i))
             continue
