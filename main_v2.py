@@ -1,20 +1,19 @@
 # 下载王者荣耀全部英雄海报
-# 海报尺寸为 1920x882，截至目前共计 240 张，大小约 60 MB
+# 海报尺寸为 1920x882，截至目前共计 263 张，大小约 68 MB
 # author: By_syk <By_syk@163.com>
-# date: 2018-01-24
+# date: 2018-04-26
 
 
 from urllib import request
 import json
 import os
 
-
 # 英雄数据URL
 URL_HERO = r'https://pvp.qq.com/web201605/js/herolist.json'
 # 英雄海报图片URL
 URL_HERO_COVER_IMG = r'http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/%d/%d-bigskin-%d.jpg'
 # 图片存放路径
-FOLDER_SAVE = r'E:/Download/QQPVPHeroCover'
+FOLDER_SAVE = r'E:/Download/QQPVPHeroCover/1920x882'
 
 
 def download_cover(hero_id, hero_name, cover_names):
@@ -28,10 +27,10 @@ def download_cover(hero_id, hero_name, cover_names):
             print('[exists]')
             continue
         # 样例：http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/152/152-bigskin-2.jpg
-        url_img = URL_HERO_COVER_IMG % (hero_id, hero_id, i + 1)  # 生成海报图片URL
+        url_img = URL_HERO_COVER_IMG % (hero_id, hero_id, i + 1)  # 生成海报图片 URL
         request.urlretrieve(url_img, file_path)
         print('[ok]')
-    
+
     # 继续探测新增但未及更新索引的海报图片
     for i in range(len(cover_names) + 1, len(cover_names) + 4):
         file_path = '%s/%s-%d.jpg' % (FOLDER_SAVE, hero_name, i)
@@ -41,12 +40,12 @@ def download_cover(hero_id, hero_name, cover_names):
         url_img = URL_HERO_COVER_IMG % (hero_id, hero_id, i)
         try:
             res = request.urlopen(url_img)
-        except Exception as e: # 404 则表示已无新图
+        except Exception:  # 404 则表示已无新图
             break
         print('downloading: %s - #%d' % (hero_name, i), end=' ')
         data = res.read()
         with open(file_path, 'wb') as file:
-           file.write(data)
+            file.write(data)
         print('[ok]')
 
 

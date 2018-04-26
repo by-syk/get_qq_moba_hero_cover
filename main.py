@@ -8,13 +8,12 @@ from urllib import request
 import json
 import os
 
-
 # 英雄数据URL
 URL_HERO = r'https://pvp.qq.com/web201605/js/herolist.json'
 # 英雄海报图片URL
 URL_HERO_COVER_IMG = r'http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/%d/%d-bigskin-%d.jpg'
 # 图片存放路径
-FOLDER_SAVE = r'E:/Download/QQPVPHeroCover'
+FOLDER_SAVE = r'E:/Download/QQPVPHeroCover/1920x882'
 
 
 def download_cover(hero_id, hero_name, cover_names):
@@ -28,8 +27,8 @@ def download_cover(hero_id, hero_name, cover_names):
             print('[exists]')
             continue
         # 样例：http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/152/152-bigskin-2.jpg
-        url_img = URL_HERO_COVER_IMG % (hero_id, hero_id, i + 1)  # 生成海报图片URL
-        request.urlretrieve(url_img, file_path)
+        url_img = URL_HERO_COVER_IMG % (hero_id, hero_id, i + 1)  # 生成海报图片 URL
+        request.urlretrieve(url_img, file_path)
         print('[ok]')
 
 
@@ -48,4 +47,3 @@ def download_all():
 
 if __name__ == '__main__':
     download_all()
-  

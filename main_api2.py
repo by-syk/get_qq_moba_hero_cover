@@ -1,7 +1,7 @@
 # 下载王者荣耀全部英雄海报
-# 海报尺寸可选，截至目前共计 242 张，1080P 大小约 160 MB
+# 海报尺寸可选，截至目前共计 269 张，1080P 大小约 170 MB
 # author: By_syk <By_syk@163.com>
-# date: 2018-01-25
+# date: 2018-04-06
 
 
 from urllib import request
@@ -26,11 +26,12 @@ def download_cover(url_img, hero_and_skin_name):
     skin_name = name_arr[1]
     print('downloading:', hero_name, '-', skin_name, end=' ')
     file_path = '%s/%s-%s.jpg' % (FOLDER_SAVE, hero_name, skin_name)  # 生成图片文件名
-    if os.path.exists(file_path):  # 避免重复下载
+    file_path_alt = '%s/%s-%s.jpg' % (FOLDER_SAVE, skin_name, hero_name)  # 用于除重
+    if os.path.exists(file_path) | os.path.exists(file_path_alt):  # 避免重复下载
         print('[exists]')
         return
     # 样例：http://shp.qpic.cn/ishow/2735012211/1516590356_84828260_8310_sProdImgNo_6.jpg/0
-    if url_img.endswith('/200'):  # 生成海报图片URL
+    if url_img.endswith('/200'):  # 生成海报图片 URL
         url_img = url_img[:-3] + '0'
     request.urlretrieve(url_img, file_path)
     print('[ok]')
