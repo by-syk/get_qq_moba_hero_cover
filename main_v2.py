@@ -53,6 +53,8 @@ def download_all():
     print('start to download')
     res = request.urlopen(URL_HERO)
     data = res.read().decode('utf-8')
+    if data.startswith('\ufeff'):  # 移除 UTF-8 BOM 字符，避免 json.loads() 出错
+        data = data.encode('utf-8')[3:].decode('utf-8')
     data_json = json.loads(data)
     for hero_data in data_json:
         # 样例：{'ename': 105, 'cname': '廉颇', 'title': '正义爆轰', 'new_type': 0, 'hero_type': 3, 'skin_name': '正义爆轰|地狱岩魂'}
